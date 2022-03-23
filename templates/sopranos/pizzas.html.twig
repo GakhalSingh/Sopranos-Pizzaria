@@ -1,5 +1,7 @@
 
 {% extends 'base.html.twig' %}
         {% block body %}
-        <h1 class> {{ pizzas }} </h1
+                {% for Category in Categories %}
+                        <p> {{ Category.name }} </p>
+                {% endfor %}
         {% endblock %}
