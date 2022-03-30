@@ -1,7 +1,21 @@
 
 {% extends 'base.html.twig' %}
         {% block body %}
-                {% for Category in Categories %}
-                        <p> {{ Category.name }} </p>
-                {% endfor %}
+                <h1 class="text-center">Aanbiedingen</h1>
+                <div class="card-group">
+                        {% for Category in Categories %}
+                                <div class="col-sm-4">
+                                        <div class="card">
+                                                <img src="{{ Category.image }}" class="card-img-top" alt="{{ Category.name }}">
+                                                <div class="card-body">
+                                                        <h5 class="card-title">{{ Category.name }} pizza's</h5>
+                                                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+                                                </div>
+                                                <div class="card-footer">
+                                                        <small class="text-muted">Geldig t/m morgen €8.99</small>
+                                                </div>
+                                        </div>
+                                </div>
+                        {% endfor %}
+                </div>
         {% endblock %}

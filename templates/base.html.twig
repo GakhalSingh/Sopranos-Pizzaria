@@ -141,60 +141,11 @@
         </div>
         <div class="p-5">
           <br>
-          <h1 class="text-center">Aanbiedingen</h1>
-          <div class="card-group">
-            <div class="card">
-              <img src="../Images/Pizza's/Margherita.png" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Margherita</h5>
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              </div>
-              <div class="card-footer">
-                <small class="text-muted">Geldig t/m morgen 21:00 €6.59</small>
-              </div>
-            </div>
-            <div class="card">
-              <img src="../Images/Pizza's/Salami.png" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Salami</h5>
-                <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-              </div>
-              <div class="card-footer">
-                <small class="text-muted">Geldig t/m morgen 21:00 €7.59</small>
-              </div>
-            </div>
-            <div class="card">
-              <img src="../Images/Pizza's/Tuna.png" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Tuna</h5>
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-              </div>
-              <div class="card-footer">
-                <small class="text-muted">Geldig t/m morgen €8.99</small>
-              </div>
-            </div>
-          </div>
+          {% block body %}
+          {% endblock %}
         </div>
-      </div>
-      <div class="card-deck">
-        {% for Category in Categories %}
-        <div class="col-sm-3">
-          <div class="card">
-            <img src="{{ Category.image }}" class="card-img-top" alt="{{ Category.name }}">
-            <div class="card-body">
-              <h5 class="card-title">{{ Category.name }} pizza's</h5>
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-            </div>
-            <div class="card-footer">
-              <small class="text-muted">Geldig t/m morgen €8.99</small>
-            </div>
-          </div>
-        </div>
-        {% endfor %}
       </div>
     </div>
-        {% block body %}
-        {% endblock %}
     </body>
     <footer class="bg-light text-center text-lg-start">
       <div class="text-center p-3" >
