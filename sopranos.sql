@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 30 mrt 2022 om 09:23
+-- Gegenereerd op: 13 apr 2022 om 15:40
 -- Serverversie: 10.4.22-MariaDB
 -- PHP-versie: 7.4.27
 
@@ -38,7 +38,7 @@ CREATE TABLE `category` (
 --
 
 INSERT INTO `category` (`id`, `name`, `image`) VALUES
-(1, 'Vegatarisch', '../Images/Pizza\'s/Margherita.png'),
+(1, 'Vegetarisch', '../Images/Pizza\'s/Margherita.png'),
 (2, 'Vlees', '../Images/Pizza\'s/Salami.png'),
 (3, 'Vis', '../Images/Pizza\'s/Tuna.png');
 
@@ -59,7 +59,8 @@ CREATE TABLE `doctrine_migration_versions` (
 --
 
 INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_time`) VALUES
-('DoctrineMigrations\\Version20220330064919', '2022-03-30 08:49:36', 47);
+('DoctrineMigrations\\Version20220413120838', '2022-04-13 14:08:46', 94),
+('DoctrineMigrations\\Version20220413124057', '2022-04-13 14:41:04', 50);
 
 -- --------------------------------------------------------
 
@@ -70,8 +71,20 @@ INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_
 CREATE TABLE `pizza` (
   `id` int(11) NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `price` double NOT NULL,
+  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `category_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `pizza`
+--
+
+INSERT INTO `pizza` (`id`, `name`, `image`, `price`, `description`, `category_id`) VALUES
+(1, 'Courgette pizza\r\n', '../Images/Products/Vega_Pizzas/courgette.png', 10.95, 'Tomatensaus, mozzarella, courgette, rode ui, gorgonzola, chili flakes en knoflookolie op de rand.', 1),
+(2, 'Margherita pizza\r\n', '../Images/Products/Vega_Pizzas/Margherita.png', 8.95, 'Tomatensaus, mozzarella en met knoflookolie op de rand van de pizza. Tip! Ook lekker met oregano.\n', 1),
+(3, '4 Kazen Pizza', '../Images/Products/Vega_Pizzas/4kaas.png', 8.95, 'Crème fraîche, mozzarella, cheddar, Goudse kaas en gorgonzola en knoflookolie op de rand.\n', 1);
 
 --
 -- Indexen voor geëxporteerde tabellen
@@ -93,7 +106,8 @@ ALTER TABLE `doctrine_migration_versions`
 -- Indexen voor tabel `pizza`
 --
 ALTER TABLE `pizza`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `category_id` (`category_id`);
 
 --
 -- AUTO_INCREMENT voor geëxporteerde tabellen
@@ -109,7 +123,17 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT voor een tabel `pizza`
 --
 ALTER TABLE `pizza`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- Beperkingen voor geëxporteerde tabellen
+--
+
+--
+-- Beperkingen voor tabel `pizza`
+--
+ALTER TABLE `pizza`
+  ADD CONSTRAINT `pizza_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

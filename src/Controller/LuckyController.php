@@ -5,6 +5,7 @@ namespace App\Controller;
 
 use App\Entity\Categories;
 use App\Entity\Category;
+use App\Entity\Pizza;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,7 +25,18 @@ class LuckyController extends AbstractController
     public function show2(EntityManagerInterface $em, int $a):Response
     {
         $Category = $em->getRepository(Category::class)->findOneBy(['id' => $a]);
+            $Pizzas = $em->getRepository(Pizza::class)->findBy(['category' => $a]);
         /** @var Category Category */
-        return $this->render('sopranos/menu.html.twig', [ 'Category' => $Category]);
+        /** @var Pizza Pizzas */
+        return $this->render('sopranos/menu.html.twig', [ 'Category' => $Category, 'Pizzas' => $Pizzas]);
     }
+
+//    /** * @Route("/menu/{a}", name="app_menu") */
+//    public function showPizza(EntityManagerInterface $em, int $a):Response
+//    {
+//        $Category = $em->getRepository(Category::class)->findOneBy(['id' => $a]);
+//
+//        /** @var Category Category */
+//        return $this->render('sopranos/menu.html.twig', [ 'Category' => $Category]);
+//    }
 }

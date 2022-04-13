@@ -2,4 +2,21 @@
 {% extends 'base.html.twig' %}
         {% block body %}
             <h1 class="text-center">{{ Category.name }} Pizza's</h1>
+            <div class="card-group">
+                {% for Pizza in Pizzas %}
+                    <div class="col-sm-4">
+                        <div class="card">
+                            <img src="{{ Pizza.image }}" class="card-img-top" alt="{{ Pizza.name }}">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ Pizza.name }}</h5>
+                                <p class="card-text">{{ Pizza.description }}</p>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-muted">Vanaf €{{ Pizza.price }}</small>
+                            </div>
+                            <a href="/menu/{{ Pizza.id }}" class="stretched-link"></a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
         {% endblock %}
