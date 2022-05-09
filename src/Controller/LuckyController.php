@@ -39,4 +39,14 @@ class LuckyController extends AbstractController
 //        /** @var Category Category */
 //        return $this->render('sopranos/menu.html.twig', [ 'Category' => $Category]);
 //    }
+
+    /** * @Route("/menu/{a}/item/{b}", name="app_item") */
+    public function show3(EntityManagerInterface $em, int $a, int $b):Response
+    {
+        $Category = $em->getRepository(Category::class)->findOneBy(['id' => $a]);
+        $Item = $em->getRepository(Pizza::class)->findOneBy(['id' => $b]);
+        /** @var Category Category */
+        /** @var Item Item */
+        return $this->render('sopranos/item.html.twig', [ 'Category' => $Category, 'Item' => $Item]);
+    }
 }

@@ -1,0 +1,33 @@
+
+{% extends 'base.html.twig' %}
+        {% block body %}
+            <h1 class="text-center">{{ Item.name }}</h1>
+            <div class="card">
+                <div class="row no-gutters">
+                    <div class="col-auto" style="width: 20rem">
+                        <img src="../../{{ Item.image }}" class="img-fluid" alt="item image">
+                    </div>
+                    <div class="col">
+                        <div class="card-block px-2">
+                            <h4 class="card-title">Ingredienten </h4>
+                            <p class="card-text">{{ Item.description }}</p>
+                            <div class="form-group">
+                                <label for="sel1">Kies Grote:</label>
+                                <select class="form-control" id="sel1">
+                                    <option>Klein</option>
+                                    <option>Medium</option>
+                                    <option>Groot</option>
+                                    <option>Extra Groot</option>
+                                </select>
+                                <label for="sel1">Kies Aantal:</label>
+                                <input type="number" class="form-control">
+                                <button class="btn-primary form-control">Toevoegen</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer w-100 text-muted">
+                    <small>Vanaf €{{ Item.price }}</small>
+                </div>
+            </div>
+        {% endblock %}
