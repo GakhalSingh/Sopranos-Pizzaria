@@ -6,6 +6,7 @@ namespace App\Controller;
 use App\Entity\Categories;
 use App\Entity\Category;
 use App\Entity\Pizza;
+use App\Form\OrderFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,22 +32,14 @@ class LuckyController extends AbstractController
         return $this->render('sopranos/menu.html.twig', [ 'Category' => $Category, 'Pizzas' => $Pizzas]);
     }
 
-//    /** * @Route("/menu/{a}", name="app_menu") */
-//    public function showPizza(EntityManagerInterface $em, int $a):Response
-//    {
-//        $Category = $em->getRepository(Category::class)->findOneBy(['id' => $a]);
-//
-//        /** @var Category Category */
-//        return $this->render('sopranos/menu.html.twig', [ 'Category' => $Category]);
-//    }
-
     /** * @Route("/menu/{a}/item/{b}", name="app_item") */
     public function show3(EntityManagerInterface $em, int $a, int $b):Response
     {
         $Category = $em->getRepository(Category::class)->findOneBy(['id' => $a]);
         $Item = $em->getRepository(Pizza::class)->findOneBy(['id' => $b]);
+        $form = $this->createForm(OrderFormType::class);
         /** @var Category Category */
         /** @var Item Item */
-        return $this->render('sopranos/item.html.twig', [ 'Category' => $Category, 'Item' => $Item]);
+        return $this->render('sopranos/item.html.twig', [ 'Category' => $Category, 'Item' => $Item, 'orderForm' => $form->createView()]);
     }
 }

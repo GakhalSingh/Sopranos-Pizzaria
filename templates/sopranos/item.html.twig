@@ -7,10 +7,13 @@
                     <div class="col-auto" style="width: 20rem">
                         <img src="../../{{ Item.image }}" class="img-fluid" alt="item image">
                     </div>
+
                     <div class="col">
                         <div class="card-block px-2">
                             <h4 class="card-title">Ingredienten </h4>
                             <p class="card-text">{{ Item.description }}</p>
+                            {{ form_start(orderForm) }}
+                            {{ form_widget(orderForm) }}
                             <div class="form-group">
                                 <label for="sel1">Kies Grote:</label>
                                 <select class="form-control" id="sel1">
@@ -21,10 +24,12 @@
                                 </select>
                                 <label for="sel1">Kies Aantal:</label>
                                 <input type="number" class="form-control">
-                                <button class="btn-primary form-control">Toevoegen</button>
+                                <button type="submit" class="btn-primary form-control">Toevoegen</button>
                             </div>
                         </div>
                     </div>
+                    {{ form_end(orderForm) }}
+
                 </div>
                 <div class="card-footer w-100 text-muted">
                     <small>Vanaf €{{ Item.price }}</small>
