@@ -10,8 +10,11 @@ class OrderFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('pizzaID')
-            ->add('amount')
+            ->add('item')
+            ->add('size')
+            ->add('status')
+            ->add('ordernumber')
+
         ;
     }
 

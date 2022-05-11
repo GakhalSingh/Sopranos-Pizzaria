@@ -6,6 +6,7 @@ namespace App\Controller;
 use App\Entity\Categories;
 use App\Entity\Category;
 use App\Entity\Pizza;
+use App\Entity\Order;
 use App\Form\OrderFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class LuckyController extends AbstractController
 {
-    /** * @Route("/home", name="app_show") */
+    /** * @Route("/home", name="app_home") */
     public function show(EntityManagerInterface $em) {
         $repository = $em->getRepository(Category::class);
         /** @var Category Categories */
@@ -43,8 +44,10 @@ class LuckyController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
             $order = new Order();
-            $order->setTitle($data['title']);
-            $order->setContent($data['content']);
+            $order->setItem($data['item']);
+            $order->setSize($data['size']);
+            $order->setStatus($data['status']);
+            $order->setOrderNumber($data['ordernumber']);
             $em->persist($order);
             $em->flush();
             return $this->redirectToRoute('app_home');
