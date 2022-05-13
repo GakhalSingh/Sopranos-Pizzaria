@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 13 apr 2022 om 15:40
+-- Gegenereerd op: 13 mei 2022 om 10:12
 -- Serverversie: 10.4.22-MariaDB
 -- PHP-versie: 7.4.27
 
@@ -60,7 +60,22 @@ CREATE TABLE `doctrine_migration_versions` (
 
 INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_time`) VALUES
 ('DoctrineMigrations\\Version20220413120838', '2022-04-13 14:08:46', 94),
-('DoctrineMigrations\\Version20220413124057', '2022-04-13 14:41:04', 50);
+('DoctrineMigrations\\Version20220413124057', '2022-04-13 14:41:04', 50),
+('DoctrineMigrations\\Version20220513081203', '2022-05-13 10:12:19', 135);
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `order`
+--
+
+CREATE TABLE `order` (
+  `id` int(11) NOT NULL,
+  `order_number` int(11) NOT NULL,
+  `item` int(11) NOT NULL,
+  `size` int(11) NOT NULL,
+  `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -74,7 +89,7 @@ CREATE TABLE `pizza` (
   `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `price` double NOT NULL,
   `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `category_id` int(11) NOT NULL
+  `category_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -103,6 +118,12 @@ ALTER TABLE `doctrine_migration_versions`
   ADD PRIMARY KEY (`version`);
 
 --
+-- Indexen voor tabel `order`
+--
+ALTER TABLE `order`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexen voor tabel `pizza`
 --
 ALTER TABLE `pizza`
@@ -118,6 +139,12 @@ ALTER TABLE `pizza`
 --
 ALTER TABLE `category`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT voor een tabel `order`
+--
+ALTER TABLE `order`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT voor een tabel `pizza`
