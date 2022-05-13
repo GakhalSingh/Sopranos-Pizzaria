@@ -14,16 +14,13 @@
                             <p class="card-text">{{ Item.description }}</p>
                             {{ form_start(orderForm) }}
                             <div class="form-group">
-                                <label for="size">Kies Grote:</label>
-                                    {{ form_row(orderForm.size,{'attr': {'class': 'form-select'}}) }}
-                                <label for="amount">Kies Aantal:</label>
-                                <input type="number" class="form-control">
+                                {{ form_row(orderForm.size,{'attr': {'class': 'form-select'}}) }}
+                                {{ form_row(orderForm.amount,{'attr': {'class': 'form-control'}}) }}
                                 <button type="submit" class="btn-primary form-control">Toevoegen</button>
                             </div>
+                            {{ form_end(orderForm) }}
                         </div>
                     </div>
-                    {{ form_end(orderForm) }}
-
                 </div>
                 <div class="card-footer w-100 text-muted">
                     <small>Vanaf €{{ Item.price }}</small>

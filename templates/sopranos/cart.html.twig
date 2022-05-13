@@ -1,0 +1,51 @@
+
+{% extends 'base.html.twig' %}
+        {% block body %}
+                        <div class="row">
+                                <div class="col-md-8 cart">
+                                        <div class="title">
+                                                <div class="row">
+                                                        <div class="col"><h4><b>Checkout</b></h4></div>
+                                                        <div class="col align-self-center text-right text-muted">Items</div>
+                                                </div>
+                                        </div>
+                                        {% for Item in Order %}
+                                        <div class="row border-top border-bottom">
+                                                <div class="row main align-items-center">
+                                                        <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/1GrakTl.jpg"></div>
+                                                        <div class="col">
+                                                                <div class="row text-muted">{{ Item.size }}</div>
+                                                                <div class="row">{{ Item.item }}</div>
+                                                        </div>
+                                                        <div class="col">
+                                                                <a href="#">-</a><a href="#" class="border">{{ Item.amount }}</a><a href="#">+</a>
+                                                        </div>
+                                                        <div class="col">€ {{ Item.amount * Item.amount }} <span class="close">&#10005;</span></div>
+                                                </div>
+                                        </div>
+                                                <h5 class="card-title">{{ Item.item }} </h5>
+                                        {% endfor %}
+                                        <div class="back-to-shop"><a href="#">&leftarrow;</a><span class="text-muted">Back to shop</span></div>
+                                </div>
+                                <div class="col-md-4 summary">
+                                        <div><h5><b>Summary</b></h5></div>
+                                        <hr>
+                                        <div class="row">
+                                                <div class="col" ><Items></Items> Aantal 5</div>
+                                                <div class="col text-right">€25.00</div>
+                                        </div>
+                                        <br>
+                                        <form>
+                                                <div><h5><b>Bezorging</b></h5></div><hr>
+                                                <select><option class="text-muted">Standaard Bezorging- &euro;5.00</option></select>
+                                                <input id="code" placeholder="Promo Code">
+                                        </form>
+                                        <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
+                                                <div class="col">Totaal:</div>
+                                                <div class="col text-right">€25.00</div>
+                                        </div>
+                                        <button class="btn">CHECKOUT</button>
+                                </div>
+                        </div>
+
+        {% endblock %}

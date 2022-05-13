@@ -24,6 +24,14 @@ class LuckyController extends AbstractController
         return $this->render('sopranos/pizzas.html.twig', [ 'Categories' => $Categories, ]);
     }
 
+    /** * @Route("/checkout", name="app_cart") */
+    public function cart(EntityManagerInterface $em) {
+        $repository = $em->getRepository(Order::class);
+        /** @var Order Order */
+        $Order = $repository->findAll();
+        return $this->render('sopranos/cart.html.twig', [ 'Order' => $Order, ]);
+    }
+
     /** * @Route("/menu/{a}", name="app_menu") */
     public function show2(EntityManagerInterface $em, int $a):Response
     {
@@ -46,6 +54,7 @@ class LuckyController extends AbstractController
             $order = new Order();
             $order->setItem($b);
             $order->setSize($data['size']);
+            $order->setAmount($data['amount']);
             $order->setStatus("Preparing");
             $order->setOrderNumber(1);
             $em->persist($order);
