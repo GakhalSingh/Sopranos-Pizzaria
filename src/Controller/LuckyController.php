@@ -52,7 +52,7 @@ class LuckyController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
             $order = new Order();
-            $order->setItem($b);
+            $order->setItem($Item);
             $order->setSize($data['size']);
             $order->setAmount($data['amount']);
             $order->setStatus("Preparing");

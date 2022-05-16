@@ -2,46 +2,62 @@
 
 namespace App\Entity;
 
-use App\Repository\OrderRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=OrderRepository::class)
- * @ORM\Table(name="`order`")
+ * Order
+ *
+ * @ORM\Table(name="order", uniqueConstraints={@ORM\UniqueConstraint(name="order-pizza", columns={"item"})})
+ * @ORM\Entity
  */
 class Order
 {
     /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @var int
+     *
+     * @ORM\Column(name="order_number", type="integer", nullable=false)
      */
     private $orderNumber;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private $item;
-
-    /**
-     * @ORM\Column(type="integer")
+     * @var int
+     *
+     * @ORM\Column(name="size", type="integer", nullable=false)
      */
     private $size;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="status", type="string", length=255, nullable=false)
      */
     private $status;
 
     /**
-     * @ORM\Column(type="integer")
+     * @var int
+     *
+     * @ORM\Column(name="amount", type="integer", nullable=false)
      */
     private $amount;
+
+    /**
+     * @var \Pizza
+     *
+     * @ORM\ManyToOne(targetEntity="Pizza")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="item", referencedColumnName="id")
+     * })
+     */
+    private $item;
 
     public function getId(): ?int
     {
@@ -56,18 +72,6 @@ class Order
     public function setOrderNumber(int $orderNumber): self
     {
         $this->orderNumber = $orderNumber;
-
-        return $this;
-    }
-
-    public function getItem(): ?int
-    {
-        return $this->item;
-    }
-
-    public function setItem(int $item): self
-    {
-        $this->item = $item;
 
         return $this;
     }
@@ -107,4 +111,18 @@ class Order
 
         return $this;
     }
+
+    public function getItem(): ?Pizza
+    {
+        return $this->item;
+    }
+
+    public function setItem(?Pizza $item): self
+    {
+        $this->item = $item;
+
+        return $this;
+    }
+
+
 }
