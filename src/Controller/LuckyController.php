@@ -29,6 +29,7 @@ class LuckyController extends AbstractController
         $repository = $em->getRepository(Order::class);
         /** @var Order Order */
         $Order = $repository->findAll();
+//        $Pizza = $repository->findAll();
         return $this->render('sopranos/cart.html.twig', [ 'Order' => $Order, ]);
     }
 

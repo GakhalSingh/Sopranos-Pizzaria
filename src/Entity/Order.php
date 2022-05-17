@@ -26,11 +26,6 @@ class Order
     /**
      * @ORM\Column(type="integer")
      */
-    private $item;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
     private $size;
 
     /**
@@ -42,6 +37,11 @@ class Order
      * @ORM\Column(type="integer")
      */
     private $amount;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Pizza::class, inversedBy="orders")
+     */
+    private $Pizza;
 
     public function getId(): ?int
     {
@@ -60,17 +60,7 @@ class Order
         return $this;
     }
 
-    public function getItem(): ?int
-    {
-        return $this->item;
-    }
 
-    public function setItem(int $item): self
-    {
-        $this->item = $item;
-
-        return $this;
-    }
 
     public function getSize(): ?int
     {
@@ -104,6 +94,18 @@ class Order
     public function setAmount(int $amount): self
     {
         $this->amount = $amount;
+
+        return $this;
+    }
+
+    public function getPizza(): ?Pizza
+    {
+        return $this->Pizza;
+    }
+
+    public function setPizza(?Pizza $Pizza): self
+    {
+        $this->Pizza = $Pizza;
 
         return $this;
     }
