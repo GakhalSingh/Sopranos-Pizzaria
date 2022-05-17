@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 13 mei 2022 om 10:12
+-- Gegenereerd op: 17 mei 2022 om 13:33
 -- Serverversie: 10.4.22-MariaDB
 -- PHP-versie: 7.4.27
 
@@ -61,7 +61,9 @@ CREATE TABLE `doctrine_migration_versions` (
 INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_time`) VALUES
 ('DoctrineMigrations\\Version20220413120838', '2022-04-13 14:08:46', 94),
 ('DoctrineMigrations\\Version20220413124057', '2022-04-13 14:41:04', 50),
-('DoctrineMigrations\\Version20220513081203', '2022-05-13 10:12:19', 135);
+('DoctrineMigrations\\Version20220513081203', '2022-05-13 10:12:19', 135),
+('DoctrineMigrations\\Version20220513090128', '2022-05-17 13:22:09', 32),
+('DoctrineMigrations\\Version20220517112439', '2022-05-17 13:24:50', 93);
 
 -- --------------------------------------------------------
 
@@ -74,8 +76,17 @@ CREATE TABLE `order` (
   `order_number` int(11) NOT NULL,
   `item` int(11) NOT NULL,
   `size` int(11) NOT NULL,
-  `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+  `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `amount` int(11) NOT NULL,
+  `product_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `order`
+--
+
+INSERT INTO `order` (`id`, `order_number`, `item`, `size`, `status`, `amount`, `product_id`) VALUES
+(1, 1, 1, 3, 'Preparing', 2, NULL);
 
 -- --------------------------------------------------------
 
@@ -121,7 +132,8 @@ ALTER TABLE `doctrine_migration_versions`
 -- Indexen voor tabel `order`
 --
 ALTER TABLE `order`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `IDX_F52993984584665A` (`product_id`);
 
 --
 -- Indexen voor tabel `pizza`
@@ -144,7 +156,7 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT voor een tabel `order`
 --
 ALTER TABLE `order`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT voor een tabel `pizza`
@@ -155,6 +167,12 @@ ALTER TABLE `pizza`
 --
 -- Beperkingen voor geëxporteerde tabellen
 --
+
+--
+-- Beperkingen voor tabel `order`
+--
+ALTER TABLE `order`
+  ADD CONSTRAINT `FK_F52993984584665A` FOREIGN KEY (`product_id`) REFERENCES `pizza` (`id`);
 
 --
 -- Beperkingen voor tabel `pizza`
