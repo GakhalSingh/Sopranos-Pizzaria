@@ -6,28 +6,26 @@
                                         <div class="title">
                                                 <div class="row">
                                                         <div class="col"><h4><b>Checkout</b></h4></div>
-                                                        <div class="col align-self-center text-center text-muted">Aantal</div>
-                                                        <div class="col align-self-center text-muted">Prijs</div>
+                                                        <div class="col align-self-center text-right text-muted">Items</div>
                                                 </div>
                                         </div>
                                         {% for Item in Order %}
                                         <div class="row border-top border-bottom">
-                                                <h5 class="card-title">{{ Item.Pizza.name }} </h5>
                                                 <div class="row main align-items-center">
-                                                        <div class="col-2"><img class="img-fluid" src="{{ Item.Pizza.image }}"></div>
+                                                        <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/1GrakTl.jpg"></div>
                                                         <div class="col">
                                                                 <div class="row text-muted">{{ Item.size }}</div>
-                                                                <div class="row">{{ Item.Pizza.name }}</div>
+                                                                <div class="row">{{ Item.item }}</div>
                                                         </div>
                                                         <div class="col">
                                                                 <a href="#">-</a><a href="#" class="border">{{ Item.amount }}</a><a href="#">+</a>
                                                         </div>
-                                                        <div class="col">€ {{ Item.Pizza.price * Item.amount }}0<span class="close">&#10005;</span></div>
-
+                                                        <div class="col">€ {{ Item.amount * Item.amount }} <span class="close">&#10005;</span></div>
                                                 </div>
                                         </div>
+                                                <h5 class="card-title">{{ Item.item }} </h5>
                                         {% endfor %}
-                                        <div class="back-to-shop"><a href="home">&leftarrow;</a><span class="text-muted">Terug naar Menu</span></div>
+                                        <div class="back-to-shop"><a href="#">&leftarrow;</a><span class="text-muted">Back to shop</span></div>
                                 </div>
                                 <div class="col-md-4 summary">
                                         <div><h5><b>Summary</b></h5></div>
