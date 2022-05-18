@@ -29,6 +29,7 @@ class LuckyController extends AbstractController
         $repository = $em->getRepository(Order::class);
         /** @var Order Order */
         $Order = $repository->findAll();
+//        $Pizza = $repository->findAll();
         return $this->render('sopranos/cart.html.twig', [ 'Order' => $Order, ]);
     }
 
@@ -52,14 +53,14 @@ class LuckyController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
             $order = new Order();
-            $order->setItem($Item);
+            $order->setPizza($Item);
             $order->setSize($data['size']);
             $order->setAmount($data['amount']);
             $order->setStatus("Preparing");
             $order->setOrderNumber(1);
             $em->persist($order);
             $em->flush();
-            return $this->redirectToRoute('app_home');
+            return $this->redirectToRoute('app_cart');
         }
         /** @var Category Category */
         /** @var Item Item */

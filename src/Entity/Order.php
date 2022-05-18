@@ -2,62 +2,46 @@
 
 namespace App\Entity;
 
+use App\Repository\OrderRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Order
- *
- * @ORM\Table(name="order", uniqueConstraints={@ORM\UniqueConstraint(name="order-pizza", columns={"item"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass=OrderRepository::class)
+ * @ORM\Table(name="`order`")
  */
 class Order
 {
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="order_number", type="integer", nullable=false)
+     * @ORM\Column(type="integer")
      */
     private $orderNumber;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="size", type="integer", nullable=false)
+     * @ORM\Column(type="string")
      */
     private $size;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="status", type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
     private $status;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="amount", type="integer", nullable=false)
+     * @ORM\Column(type="integer")
      */
     private $amount;
 
     /**
-     * @var \Pizza
-     *
-     * @ORM\ManyToOne(targetEntity="Pizza")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="item", referencedColumnName="id")
-     * })
+     * @ORM\ManyToOne(targetEntity=Pizza::class, inversedBy="orders")
      */
-    private $item;
+    private $Pizza;
 
     public function getId(): ?int
     {
@@ -76,12 +60,12 @@ class Order
         return $this;
     }
 
-    public function getSize(): ?int
+    public function getSize(): ?string
     {
         return $this->size;
     }
 
-    public function setSize(int $size): self
+    public function setSize(string $size): self
     {
         $this->size = $size;
 
@@ -112,17 +96,15 @@ class Order
         return $this;
     }
 
-    public function getItem(): ?Pizza
+    public function getPizza(): ?Pizza
     {
-        return $this->item;
+        return $this->Pizza;
     }
 
-    public function setItem(?Pizza $item): self
+    public function setPizza(?Pizza $Pizza): self
     {
-        $this->item = $item;
+        $this->Pizza = $Pizza;
 
         return $this;
     }
-
-
 }
