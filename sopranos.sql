@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 17 mei 2022 om 13:33
+-- Gegenereerd op: 18 mei 2022 om 14:39
 -- Serverversie: 10.4.22-MariaDB
 -- PHP-versie: 7.4.27
 
@@ -45,6 +45,19 @@ INSERT INTO `category` (`id`, `name`, `image`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Tabelstructuur voor tabel `customer`
+--
+
+CREATE TABLE `customer` (
+  `id` int(11) NOT NULL,
+  `email` varchar(180) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `roles` longtext COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '(DC2Type:json)',
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Tabelstructuur voor tabel `doctrine_migration_versions`
 --
 
@@ -63,7 +76,11 @@ INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_
 ('DoctrineMigrations\\Version20220413124057', '2022-04-13 14:41:04', 50),
 ('DoctrineMigrations\\Version20220513081203', '2022-05-13 10:12:19', 135),
 ('DoctrineMigrations\\Version20220513090128', '2022-05-17 13:22:09', 32),
-('DoctrineMigrations\\Version20220517112439', '2022-05-17 13:24:50', 93);
+('DoctrineMigrations\\Version20220517112439', '2022-05-17 13:24:50', 93),
+('DoctrineMigrations\\Version20220517115317', '2022-05-18 13:40:29', 64),
+('DoctrineMigrations\\Version20220517115605', '2022-05-18 13:40:29', 143),
+('DoctrineMigrations\\Version20220518121100', '2022-05-18 14:11:09', 125),
+('DoctrineMigrations\\Version20220518122808', '2022-05-18 14:28:18', 59);
 
 -- --------------------------------------------------------
 
@@ -74,19 +91,18 @@ INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_
 CREATE TABLE `order` (
   `id` int(11) NOT NULL,
   `order_number` int(11) NOT NULL,
-  `item` int(11) NOT NULL,
-  `size` int(11) NOT NULL,
+  `size` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `amount` int(11) NOT NULL,
-  `product_id` int(11) DEFAULT NULL
+  `pizza_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Gegevens worden geëxporteerd voor tabel `order`
 --
 
-INSERT INTO `order` (`id`, `order_number`, `item`, `size`, `status`, `amount`, `product_id`) VALUES
-(1, 1, 1, 3, 'Preparing', 2, NULL);
+INSERT INTO `order` (`id`, `order_number`, `size`, `status`, `amount`, `pizza_id`) VALUES
+(6, 1, 'Klein', 'Preparing', 1, 3);
 
 -- --------------------------------------------------------
 
@@ -123,6 +139,13 @@ ALTER TABLE `category`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexen voor tabel `customer`
+--
+ALTER TABLE `customer`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `UNIQ_81398E09E7927C74` (`email`);
+
+--
 -- Indexen voor tabel `doctrine_migration_versions`
 --
 ALTER TABLE `doctrine_migration_versions`
@@ -133,7 +156,7 @@ ALTER TABLE `doctrine_migration_versions`
 --
 ALTER TABLE `order`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `IDX_F52993984584665A` (`product_id`);
+  ADD KEY `IDX_F5299398D41D1D42` (`pizza_id`);
 
 --
 -- Indexen voor tabel `pizza`
@@ -153,10 +176,16 @@ ALTER TABLE `category`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT voor een tabel `customer`
+--
+ALTER TABLE `customer`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT voor een tabel `order`
 --
 ALTER TABLE `order`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT voor een tabel `pizza`
@@ -172,7 +201,7 @@ ALTER TABLE `pizza`
 -- Beperkingen voor tabel `order`
 --
 ALTER TABLE `order`
-  ADD CONSTRAINT `FK_F52993984584665A` FOREIGN KEY (`product_id`) REFERENCES `pizza` (`id`);
+  ADD CONSTRAINT `FK_F5299398D41D1D42` FOREIGN KEY (`pizza_id`) REFERENCES `pizza` (`id`);
 
 --
 -- Beperkingen voor tabel `pizza`
