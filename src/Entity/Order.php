@@ -24,7 +24,7 @@ class Order
     private $orderNumber;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string")
      */
     private $size;
 
@@ -60,14 +60,12 @@ class Order
         return $this;
     }
 
-
-
-    public function getSize(): ?int
+    public function getSize(): ?string
     {
         return $this->size;
     }
 
-    public function setSize(int $size): self
+    public function setSize(string $size): self
     {
         $this->size = $size;
 

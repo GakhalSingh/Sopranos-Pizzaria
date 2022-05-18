@@ -1,5 +1,7 @@
 
 {% extends 'base.html.twig' %}
+        {% set TotalPrice = 0 %}
+        {% set TotalItems = 0 %}
         {% block body %}
                         <div class="row">
                                 <div class="col-md-8 cart">
@@ -16,25 +18,26 @@
                                                 <div class="row main align-items-center">
                                                         <div class="col-2"><img class="img-fluid" src="{{ Item.Pizza.image }}"></div>
                                                         <div class="col">
-                                                                <div class="row text-muted">{{ Item.size }}</div>
-                                                                <div class="row">{{ Item.Pizza.name }}</div>
+                                                                <div class="row text-muted">{{ Item.size }} </div>
+                                                                <div class="row"> €{{ Item.Pizza.Price }} per stuk</div>
                                                         </div>
                                                         <div class="col">
                                                                 <a href="#">-</a><a href="#" class="border">{{ Item.amount }}</a><a href="#">+</a>
                                                         </div>
-                                                        <div class="col">€ {{ Item.Pizza.price * Item.amount }}0<span class="close">&#10005;</span></div>
-
+                                                        <div class="col">€ {{ (Item.Pizza.price * Item.amount)|round(2, 'ceil') }}<span class="close">&#10005;</span></div>
+                                                        {% set TotalItems = TotalItems + Item.amount %}
+                                                        {% set TotalPrice = TotalPrice + (Item.Pizza.price * Item.amount) %}
                                                 </div>
                                         </div>
                                         {% endfor %}
-                                        <div class="back-to-shop"><a href="home">&leftarrow;</a><span class="text-muted">Terug naar Menu</span></div>
+                                        <div class="back-to-shop"><a href="/home">&leftarrow;</a><span class="text-muted">Terug naar Menu</span></div>
                                 </div>
                                 <div class="col-md-4 summary">
                                         <div><h5><b>Summary</b></h5></div>
                                         <hr>
                                         <div class="row">
-                                                <div class="col" ><Items></Items> Aantal 5</div>
-                                                <div class="col text-right">€25.00</div>
+                                                <div class="col" ><Items></Items> Aantal {{ TotalItems }}</div>
+                                                <div class="col text-right">€{{ TotalPrice }}</div>
                                         </div>
                                         <br>
                                         <form>
@@ -44,7 +47,7 @@
                                         </form>
                                         <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
                                                 <div class="col">Totaal:</div>
-                                                <div class="col text-right">€25.00</div>
+                                                <div class="col text-right">€{{ TotalPrice + 5}}</div>
                                         </div>
                                         <button class="btn">CHECKOUT</button>
                                 </div>

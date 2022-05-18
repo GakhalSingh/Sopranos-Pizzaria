@@ -14,10 +14,10 @@ class OrderFormType extends AbstractType
             ->add('amount')
             ->add('size', ChoiceType::class, [
                 'choices'  => [
-                    'Klein' => 1,
-                    'Medium' => 2,
-                    'Groot' => 3,
-                    'Extra Groot' => 4,
+                    'Klein' => 'Klein',
+                    'Medium' => 'Medium',
+                    'Groot' => 'Groot',
+                    'Extra Groot' => 'Extra Groot',
                 ],])
         ;
     }
