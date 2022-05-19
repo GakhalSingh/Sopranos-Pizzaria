@@ -60,7 +60,7 @@ class LuckyController extends AbstractController
             $order->setOrderNumber(1);
             $em->persist($order);
             $em->flush();
-            return $this->redirectToRoute('app_home');
+            return $this->redirectToRoute('app_cart');
         }
         /** @var Category Category */
         /** @var Item Item */
