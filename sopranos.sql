@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 18 mei 2022 om 14:39
+-- Gegenereerd op: 19 mei 2022 om 10:58
 -- Serverversie: 10.4.22-MariaDB
 -- PHP-versie: 7.4.27
 
@@ -55,6 +55,13 @@ CREATE TABLE `customer` (
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Gegevens worden geëxporteerd voor tabel `customer`
+--
+
+INSERT INTO `customer` (`id`, `email`, `roles`, `password`) VALUES
+(1, 'test@test.nl', '[]', '$2y$13$1HEGPVwQyRNapFgA2yKc2e92ZabHttZV4DZsr6/b6BOZJGWK4lKuK');
+
 -- --------------------------------------------------------
 
 --
@@ -96,13 +103,6 @@ CREATE TABLE `order` (
   `amount` int(11) NOT NULL,
   `pizza_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Gegevens worden geëxporteerd voor tabel `order`
---
-
-INSERT INTO `order` (`id`, `order_number`, `size`, `status`, `amount`, `pizza_id`) VALUES
-(6, 1, 'Klein', 'Preparing', 1, 3);
 
 -- --------------------------------------------------------
 
@@ -179,13 +179,13 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT voor een tabel `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT voor een tabel `order`
 --
 ALTER TABLE `order`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT voor een tabel `pizza`
